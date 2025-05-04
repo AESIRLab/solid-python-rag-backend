@@ -1,0 +1,50 @@
+,query,filename
+0,"According to the text, the location of the abbey had an island in the Thames called Thorney Island. How long did the monks live there?",ctx_experiment_frames/pg_v_vs.csv
+1,What was the original purpose of the monastery on the site before the 11th century?,ctx_experiment_frames/pg_v_vs.csv
+2,How did the pressures of the Victorian era influence Darwin's work and his well-being?,ctx_experiment_frames/pg_v_vs.csv
+3,- 1. The Wedgwood family relocated to Down House after what event?,ctx_experiment_frames/pg_v_vs.csv
+4,"According to the text, how did the monks of Westminster Abbey avoid being ejected under Elizabeth I?",ctx_experiment_frames/pg_v_vs.csv
+5,"What is the primary focus of the University's research activities, as highlighted in the document?",ctx_experiment_frames/pg_v_vs.csv
+6,What was the primary reason for the dissolution of Westminster Abbey in 1550?,ctx_experiment_frames/llm_v_vs.csv
+7,What is the primary motivation behind Darwin’s intense focus on transmutation research?,ctx_experiment_frames/llm_v_vs.csv
+8,"What is the primary function of the General Council, according to the provided text?",ctx_experiment_frames/llm_v_vs.csv
+9,"Darwin's observations about the shells on the Galapagos Islands, especially the varying shapes of tortoise shells, initially led him to believe that the atolls of the Cocos Islands had formed due to what process?",ctx_experiment_frames/llm_v_vs.csv
+10,"The Henry VII Lady Chapel is notable for its decoration, particularly the 95 statues of saints.  What is a significant detail about the ceiling's design?",ctx_experiment_frames/llm_v_vs.csv
+11,"The document details the history of stained glass at Westminster Abbey.  Besides the typical replacement of clear glass, what specific type of glass was utilized in the 19th century, and what was the significance of this change?",ctx_experiment_frames/llm_v_vs.csv
+12,What was the primary influence on Darwin's early life and education?,ctx_experiment_frames/llm_v_vs.csv
+13,What is the name of the library system at the university?,ctx_experiment_frames/llm_v_vs.csv
+14,What type of architectural style was the abbey built in?,ctx_experiment_frames/avs_v_vs.csv
+15,"What is the significance of the Diagnostic Society of Edinburgh, and what connection does it have to the university?",ctx_experiment_frames/vs4_v_vs2p2.csv
+16,"Darwin's observations about the shells on the Galapagos Islands, especially the varying shapes of tortoise shells, initially led him to believe that the atolls of the Cocos Islands had formed due to what process?",ctx_experiment_frames/vs4_v_vs2p2.csv
+17,"Darwin's observations about the shells on the Galapagos Islands, especially the varying shapes of tortoise shells, initially led him to believe that the atolls of the Cocos Islands had formed due to what process?",ctx_experiment_frames/avs4_v_avs2p2.csv
+18,"What significant event took place on 6 July 1920 at the King's Buildings campus, and which department did the first new building house?",ctx_experiment_frames/pg4_v_pg2p2.csv
+19,"Darwin's observations about the shells on the Galapagos Islands, especially the varying shapes of tortoise shells, initially led him to believe that the atolls of the Cocos Islands had formed due to what process?",ctx_experiment_frames/allm_v_avs.csv
+20,"What is the primary concept that Darwin is exploring in his work on population and the struggle for existence, as described by Malthus?",ctx_experiment_frames/allm_v_avs.csv
+21,What was the main occupation of John Stevens Henslow?,ctx_experiment_frames/allm_v_avs.csv
+22,"What is the central theme or argument of Darwin's research concerning human population growth and its potential consequences, as presented in his writings?",ctx_experiment_frames/allm_v_avs.csv
+23,What was the main occupation of John Stevens Henslow?,ctx_experiment_frames/avs4p2_v_avs2p2p2.csv
+24,"What is the central theme or argument of Darwin's research concerning human population growth and its potential consequences, as presented in his writings?",ctx_experiment_frames/avs4p2_v_avs2p2p2.csv
+25,"What was John Stevens Henslow’s primary area of interest during his career, and how did his early interests align with his later career path?",ctx_experiment_frames/pg6_v_pg4p2.csv
+26,What was the major cleaning and restoration program carried out on the Cosmati pavement?,ctx_experiment_frames/pg6_v_pg4p2.csv
+27,"According to the text, what was the primary focus of Charles Darwin's early scientific investigations?",ctx_experiment_frames/pg6_v_pg4p2.csv
+28,"Based on the 2021 THE World University Rankings by Subject, which subject at Edinburgh University ranked 10th worldwide, and how did the university perform globally in Computer Science?",ctx_experiment_frames/llm_v_pg.csv
+29,What is the primary function of the south transept?,ctx_experiment_frames/llm_v_pg.csv
+30,What was the initial purpose of the dissolution of the Westminster Abbey?,ctx_experiment_frames/llm_v_pg.csv
+31,"What was the original purpose of the elaborate medieval ceremony associated with the founding of the Most Honourable Order of the Bath, and how often are installation ceremonies held at the abbey?",ctx_experiment_frames/llm_v_pg.csv
+32,What was the primary reason for the unfinished state of the church when Richard II first arrived?,ctx_experiment_frames/llm_v_pg.csv
+33,What was the main occupation of John Stevens Henslow?,ctx_experiment_frames/avs6_v_avs4p2.csv
+34,"What is the central theme or argument of Darwin's research concerning human population growth and its potential consequences, as presented in his writings?",ctx_experiment_frames/avs6_v_avs4p2.csv
+35,What was the main occupation of John Stevens Henslow?,ctx_experiment_frames/avs6_v_avs2p2p2.csv
+36,"What is the central theme or argument of Darwin's research concerning human population growth and its potential consequences, as presented in his writings?",ctx_experiment_frames/avs6_v_avs2p2p2.csv
+37,"Considering the bibliography provided, how does ""Whatever is Under the Earth: The Geological Society of London 1807 to 2007"" contribute to our understanding of the Society's history and impact over two centuries?",ctx_experiment_frames/pg4p2_v_pg2p2p2.csv
+38,"Why was the nave constructed over the course of centuries, and what was the initial impact of the building process?",ctx_experiment_frames/vs6_v_vs2p2p2.csv
+39,- 1. The Wedgwood family relocated to Down House after what event?,ctx_experiment_frames/vs6_v_vs2p2p2.csv
+40,How many years did it take to finish the church after the donation of funds?,ctx_experiment_frames/vs6_v_vs2p2p2.csv
+41,"What is the significance of the Diagnostic Society of Edinburgh, and what connection does it have to the university?",ctx_experiment_frames/allm_v_llm.csv
+42,"What is the primary focus of the University's research activities, as highlighted in the document?",ctx_experiment_frames/allm_v_llm.csv
+43,What specific geographic features and discoveries did Darwin make during his voyage on HMS Beagle?,ctx_experiment_frames/allm_v_llm.csv
+44,"The Henry VII Lady Chapel is notable for its decoration, particularly the 95 statues of saints.  What is a significant detail about the ceiling's design?",ctx_experiment_frames/allm_v_llm.csv
+45,"What is the primary reason for Charles Darwin's intense interest in evolution during the 1870s, as highlighted in the text?",ctx_experiment_frames/allm_v_llm.csv
+46,What was the main occupation of John Stevens Henslow?,ctx_experiment_frames/allm_v_llm.csv
+47,What was the purpose of the BioQuarter project?,ctx_experiment_frames/pg6_v_pg2p2p2.csv
+48,What was the main occupation of John Stevens Henslow?,ctx_experiment_frames/pg6_v_pg2p2p2.csv

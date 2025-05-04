@@ -1,0 +1,7 @@
+,query,filename
+0,"What were the primary reasons for Darwin’s dissatisfaction with the traditional views on species, and how did these concerns ultimately lead him to formulate his theory of natural selection?",ctx_experiment_frames/pg_v_vs.csv
+1,"What were the primary reasons for Darwin’s dissatisfaction with the traditional views on species, and how did these concerns ultimately lead him to formulate his theory of natural selection?",ctx_experiment_frames/llm_v_vs.csv
+2,"What were the primary reasons for Darwin’s dissatisfaction with the traditional views on species, and how did these concerns ultimately lead him to formulate his theory of natural selection?",ctx_experiment_frames/avs_v_vs.csv
+3,"What were the primary reasons for Darwin’s dissatisfaction with the traditional views on species, and how did these concerns ultimately lead him to formulate his theory of natural selection?",ctx_experiment_frames/allm_v_avs.csv
+4,"What were the primary reasons for Darwin’s dissatisfaction with the traditional views on species, and how did these concerns ultimately lead him to formulate his theory of natural selection?",ctx_experiment_frames/llm_v_pg.csv
+5,"What were the primary reasons for Darwin’s dissatisfaction with the traditional views on species, and how did these concerns ultimately lead him to formulate his theory of natural selection?",ctx_experiment_frames/allm_v_llm.csv
