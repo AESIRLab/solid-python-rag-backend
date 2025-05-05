@@ -15,7 +15,7 @@ nest_asyncio.apply()
 
 Settings.chunk_size = 1024
 Settings.chunk_overlap = 128
-llm = Ollama(model="qwen3:14b", verbose=True, temperature=0.0, request_timeout=300)
+llm = Ollama(model="qwen3:14b", verbose=True, temperature=0.0, request_timeout=45)
 Settings.llm = llm
 
 
@@ -53,8 +53,8 @@ completed = [
 ]
 
 async def main():
-    experiment_frames = 'ctx_experiment_frames/'
-
+    # experiment_frames = 'ctx_experiment_frames/'
+    experiment_frames = 'allm_vs_avs_fixed/'
     pairwise_evaluator = PairwiseComparisonEvaluator(
         enforce_consensus=False,
         parser_function=parser_function,
@@ -70,7 +70,7 @@ async def main():
         df = pd.read_csv(experiment_frames+file)
         if df.columns.values[0] != 'query':
             df = df.drop(df.columns[0], axis=1)
-        df = df[['query', 'reference_answer', 'reference_contexts', 'left_answer', 'right_answer', 'left', 'right']] # .head(2)
+        df = df[['query', 'reference_answer', 'reference_contexts', 'left_answer', 'right_answer', 'left', 'right']]
         queries = df['query'].to_numpy()
         contexts = df['reference_contexts'].to_numpy()
         answers = df['reference_answer'].to_numpy()
@@ -79,10 +79,11 @@ async def main():
         lefts = df['left'].to_numpy()
         rights= df['right'].to_numpy()
         results = []
+        print(len(queries))
         for idx, (query, context, answer, left_response, right_response, left, right) in enumerate(list(zip(queries, contexts, answers, left_responses, right_responses, lefts, rights))):
             eval_start = time.time()
-            print(f"left response: {left_response}\n\n")
-            print(f"right response: {right_response}\n\n")
+            # print(f"left response: {left_response}\n\n")
+            # print(f"right response: {right_response}\n\n")
             
             try:
                 pairwise_result = await pairwise_evaluator.aevaluate(
@@ -109,10 +110,13 @@ async def main():
         out_df = pd.DataFrame(results, columns=['query', 'left', 'right', 
                                                 'feedback'
                                                 ])
-        out_df.to_csv(f'./qwen3_experiment_results_run2/{file.replace(".csv", "_result.csv")}')
-        print(f"finished file: {file} in {time.time() - file_start}")
+        # # out_df.to_csv(f'./qwen3_experiment_results_run2/{file.replace(".csv", "_result.csv")}')
+        out_df.to_csv(f'./allm_vs_avs_qwen_results/qwen3_results.csv')
+        # print(f"finished file: {file} in {time.time() - file_start}")
     log_failures_df = pd.DataFrame(log_failures, columns=['query', 'filename'])
-    log_failures_df.to_csv(f'./qwen3_experiment_results_run2/log_failed_queries.csv')
-        
+    # log_failures_df.to_csv(f'./qwen3_experiment_results_run2/log_failed_queries.csv')
+    log_failures_df.to_csv(f'./allm_vs_avs_qwen_results/log_failed_queries.csv')
+    
+
 if __name__ == '__main__':
     asyncio.run(main())
