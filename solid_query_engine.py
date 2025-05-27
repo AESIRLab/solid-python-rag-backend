@@ -32,7 +32,9 @@ NEO4J_URL = os.getenv("NEO4J_URL_LOCAL")
 
 rag_up_endpoint = os.getenv("RAG_UP_ENDPOINT", "")
 DATABASE_NAME = os.getenv("DATABASE_NAME")
-UP_UPDATE_ENDPOINT_URI = os.getenv("UP_UPDATE_ENDPOINT_URI")
+UP_CHANGE_ENDPOINT = os.getenv("UP_CHANGE_ENDPOINT")
+
+# rag_up_endpoint = ""
 
 llm = HuggingFaceLLM(model_name="google/gemma-3-1b-it", tokenizer_name="google/gemma-3-1b-it")
 Settings.llm = llm
@@ -64,6 +66,7 @@ ssl_context.verify_mode = ssl.CERT_NONE
 
 async def handle_up_endpoint_update(url, auth):
     async with websockets.connect(url, ssl=ssl_context, open_timeout=600, close_timeout=600) as websocket:
+        global rag_up_endpoint
         try:
             while True:
                 response = await websocket.recv()
@@ -125,6 +128,7 @@ async def handle_connection(url, auth):
                 llm_response = await query_engine.aquery(json_data['query'])
                 print(str(llm_response))
                 # print(f"query executed in {time.time() - start} seconds")
+                print(f"sending query to {rag_up_endpoint}")
                 response = requests.put(rag_up_endpoint, headers={'Content-Type': 'application/json'}, 
                                         json={
                                             'generated_text': str(llm_response), 
@@ -151,9 +155,19 @@ async def main():
         client_secret=secret
     )
     auth = SolidClientCredentialsAuth(token_provider)
-    
+
+    response = requests.get(UP_CHANGE_ENDPOINT,auth=auth,verify=False)
+    if response.status_code not in range(200,300):
+        response = requests.put(UP_CHANGE_ENDPOINT, auth=auth, verify=False)
+        if response.status_code in range(200, 300):
+            print(f"successfully created UP CHANGE ENDPOINT at {UP_CHANGE_ENDPOINT}")
+        else:
+            print(f"failed to create UP CHANGE ENDPOINT at {UP_CHANGE_ENDPOINT} with response: {response}")
+            exit(-1)
+
     topics = [
         TOPIC_URI,
+        UP_CHANGE_ENDPOINT,
         "https://ec2-18-119-19-244.us-east-2.compute.amazonaws.com/dorothy/profile/wikipedia_pages/",
         "https://ec2-18-119-19-244.us-east-2.compute.amazonaws.com/zeke/profile/wikipedia_pages/",
         # "https://ec2-18-119-19-244.us-east-2.compute.amazonaws.com/kaylee/profile/wikipedia_pages/"
@@ -173,10 +187,12 @@ async def main():
         listen_uri = ws_data['receiveFrom']
         listen_uris.append(listen_uri)
     print(listen_uris)
+
     things = [
-        (listen_uris[0], auth, handle_connection)
+        (listen_uris[0], auth, handle_connection),
+        (listen_uris[1], auth, handle_up_endpoint_update),
     ]
-    for uri in listen_uris[1:]:
+    for uri in listen_uris[2:]:
         things.append((uri, auth, handle_index_update))
 
     tasks = [f(uri, auth) for uri, auth, f in things]
