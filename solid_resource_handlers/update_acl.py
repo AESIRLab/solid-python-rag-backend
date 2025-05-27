@@ -56,7 +56,9 @@ def add_web_id_to_acl_resource(own_webid: str, acl_text: str, web_id: str, resou
     identifier = base_uri + fragment
     graph.add((URIRef(identifier), RDF.type, ACL.Authorization))
     graph.add((URIRef(identifier), ACL.accessTo, URIRef(resource)))
+    # graph.add((URIRef(identifier), ACL.accessTo, URIRef(resource+"/")))
     graph.add((URIRef(identifier), ACL.agent, URIRef(web_id)))
+    graph.add((URIRef(identifier), ACL.default, URIRef(resource)))
     
     for mode in modes:
         if mode == "Read":
@@ -101,6 +103,7 @@ def main():
 
         BASE_URI = "".join(user['web_id'].rsplit('/', 1)[0:-1]) + '/'
         TARGET_URI = BASE_URI + 'wikipedia_pages/'
+        print(TARGET_URI)
         response = requests.get(TARGET_URI, auth=auth, verify=False)
         
         print(f" response code {response.status_code} for uri {TARGET_URI}")
@@ -109,10 +112,10 @@ def main():
         # # 2. Now start the ACL handling
         # # 3. get all the Link headers from the response
         link_headers = get_link_headers(response)
-        print(f"link_headers: {link_headers}")
+        # print(f"link_headers: {link_headers}")
         # # 4. the link headers must be parsed into a dict
         parsed_link_headers = parse_link_headers(link_headers)
-        print(f"parsed headers: {parsed_link_headers}")
+        # print(f"parsed headers: {parsed_link_headers}")
         # # 5. extract the one that has the kind rel="acl"
         # # that will be your access control list for the resource from 1.
         acl_resource_uri = get_acl_resource(parsed_link_headers)
@@ -121,28 +124,28 @@ def main():
         # # 6. get the actual ACL file contents
         response = requests.get(acl_resource_uri, auth=auth, verify=False)
         print(f"acl response: {response}")
-        if response.status_code not in range(200, 300):
-            # # 7. feed the text of the ACL document, the WebID you want to add, the resource URI, and the modes as a 
-            # # list. default for modes is READ so it can be left empty
-            g = add_web_id_to_acl_resource(user['web_id'], '', PERMS_WEBID, TARGET_URI, ["Read", "Append"])
-            headers = {
-                'content-type': 'text/turtle'
-            }
-            data = g.serialize()
-            print(data)
-            # # 8. serialize the graph, set the header, pass in the auth to PUT
-            # # for the acl resource uri since we are changing the file in its entirety
-            # # could possibly be PATCH but this is safer(?)
-            response = requests.put(
-                acl_resource_uri, 
-                headers=headers, 
-                auth=auth, 
-                verify=False, 
-                data=data)
-            print(response)
-        print(f"acl response code: {response.status_code}")
+        # if response.status_code not in range(200, 300):
+        # # 7. feed the text of the ACL document, the WebID you want to add, the resource URI, and the modes as a 
+        # # list. default for modes is READ so it can be left empty
+        g = add_web_id_to_acl_resource(user['web_id'], '', PERMS_WEBID, TARGET_URI, ["Read", "Write"])
+        headers = {
+            'content-type': 'text/turtle'
+        }
+        data = g.serialize()
+        print(data)
+        # # 8. serialize the graph, set the header, pass in the auth to PUT
+        # # for the acl resource uri since we are changing the file in its entirety
+        # # could possibly be PATCH but this is safer(?)
+        response = requests.put(
+            acl_resource_uri, 
+            headers=headers, 
+            auth=auth, 
+            verify=False, 
+            data=data)
+        print(response)
+        # print(f"acl response code: {response.status_code}")
         response = requests.get(acl_resource_uri, verify=False, auth=auth)
-        print(f"new acl text: {response.text}")
+        # print(f"new acl text: {response.text}")
 
 
 if __name__ == '__main__':

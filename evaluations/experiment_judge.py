@@ -15,7 +15,7 @@ nest_asyncio.apply()
 
 Settings.chunk_size = 1024
 Settings.chunk_overlap = 128
-llm = Ollama(model="qwen3:14b", verbose=True, temperature=0.0, request_timeout=45)
+llm = Ollama(model="qwen3:14b", verbose=True, temperature=0.0, request_timeout=120)
 Settings.llm = llm
 
 
@@ -24,7 +24,7 @@ pairwise_eval_prompt_template = "You are to perform the role as an impartial jud
 "You should evaluate these responses based upon" + \
 "their content, how well they answer the query: {query}, and" + \
 "similarity to the provided reference answer: {reference}. For the first response, provide a score strictly between 0.0 and 1.0, and one sentence of feedback." + \
-"Use this score and setence to fill in Response 1 Feedback and Response 1 Score in the output template." + \
+"Use this score and sentence to fill in Response 1 Feedback and Response 1 Score in the output template." + \
 "For the second response, provide a score strictly between 0.0 and 1.0, and one sentence of feedback." + \
 "Use this score and setence to fill in Response 2 Feedback and Response 2 Score in the output template." + \
 "After you have determined one score and one sentence of feedback for the first response, " + \
@@ -54,7 +54,8 @@ completed = [
 
 async def main():
     # experiment_frames = 'ctx_experiment_frames/'
-    experiment_frames = 'allm_vs_avs_fixed/'
+    # experiment_frames = 'allm_vs_avs_fixed/'
+    experiment_frames = 'android_dyn_experiment_frames/'
     pairwise_evaluator = PairwiseComparisonEvaluator(
         enforce_consensus=False,
         parser_function=parser_function,
@@ -110,13 +111,14 @@ async def main():
         out_df = pd.DataFrame(results, columns=['query', 'left', 'right', 
                                                 'feedback'
                                                 ])
-        # # out_df.to_csv(f'./qwen3_experiment_results_run2/{file.replace(".csv", "_result.csv")}')
-        out_df.to_csv(f'./allm_vs_avs_qwen_results/qwen3_results.csv')
+        # out_df.to_csv(f'./qwen3_experiment_results_run2/{file.replace(".csv", "_result.csv")}')
+        # out_df.to_csv(f'./allm_vs_avs_qwen_results/qwen3_results.csv')
+        out_df.to_csv(f'avs_dyn_qwen_results/{file.replace(".csv", "_result.csv")}')
         # print(f"finished file: {file} in {time.time() - file_start}")
     log_failures_df = pd.DataFrame(log_failures, columns=['query', 'filename'])
     # log_failures_df.to_csv(f'./qwen3_experiment_results_run2/log_failed_queries.csv')
-    log_failures_df.to_csv(f'./allm_vs_avs_qwen_results/log_failed_queries.csv')
-    
+    # log_failures_df.to_csv(f'./allm_vs_avs_qwen_results/log_failed_queries.csv')
+    log_failures_df.to_csv(f'./avs_dyn_qwen_results/log_failed_queries.csv')
 
 if __name__ == '__main__':
     asyncio.run(main())

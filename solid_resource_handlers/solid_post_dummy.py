@@ -40,21 +40,17 @@ async def main():
     ssl_context.check_hostname = False
     ssl_context.verify_mode = ssl.CERT_NONE
 
-#     response = requests.post(
-#         topic,
-#         headers={'content-type': 'application/json'}, 
+    response = requests.post(
+        topic,
+        headers={'content-type': 'application/json'}, 
 #         json={"query_id": 2,
 #   "query": "Please explain the important people in Darwin's life and his contributions to society", }, 
-#         verify=False,
-#         auth=auth)
-    print(topic)
-    response = requests.put(
-        topic + 'test.json',
-        headers={'content-type': 'application/json'}, 
-        json={"query_id": 2,
-  "query": "Please explain the important people in Darwin's life and his contributions to society", }, 
+        json={
+            "content": "some random content"
+        },
         verify=False,
         auth=auth)
+    print(topic)
 
     # response = requests.get(
     #     topic,
